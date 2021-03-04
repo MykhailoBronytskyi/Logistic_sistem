@@ -48,10 +48,10 @@ class LogisticSystem:
                 car.isAvailable = False
                 new_order.vehicle = car
 
-                LogisticSystem.all_the_orders += [new_order]  # or just car
+                LogisticSystem.all_the_orders += [new_order]
                 self.orders = LogisticSystem.all_the_orders[:]
 
-                return None
+                return
         print('There is no available vehicle to deliver an order.')
 
 
