@@ -1,7 +1,9 @@
 '''Module that creates basic objects like Location, Vehicle and Item
 to create NovaPoshta Logistic System'''
 
+
 from typing import List
+
 
 class Location:
     '''Location were to deliver a thing
@@ -9,7 +11,7 @@ class Location:
     >>> place.__class__.__name__
     'Location'
     '''
-    def __init__(self, city: str=None, postoffice: int=None):
+    def __init__(self, city: str = None, postoffice: int = None):
         '''Initialises a place for a deliver
         >>> place = Location('Lwiw', 121)
         >>> print(place.city, place.postoffice)
@@ -29,7 +31,7 @@ class Item:
     >>> thing.__class__.__name__
     'Item'
     '''
-    def __init__(self, name: str='No_thing', price: float=0):
+    def __init__(self, name: str = 'No_thing', price: float = 0):
         '''Initialises name and price for an item
         >>> thing = Item('orange', 15)
         >>> print(thing.name, thing.price)
@@ -38,12 +40,13 @@ class Item:
         self.name = name
         self.price = price
 
+
     def __str__(self) -> str:
         '''Prints information messege to a user
         >>> thing = Item('orange', 15)
         >>> print(thing)
         The item orange has 15 cost.
-        ''' 
+        '''
         return f'The item {self.name} has {self.price} cost.'
 
 
@@ -54,8 +57,7 @@ class Vehicle:
     'Vehicle'
     '''
 
-    # vehicleNo = 0
-    def __init__(self, vehicleNo: int, isAvailable: bool=True):
+    def __init__(self, vehicleNo: int, isAvailable: bool = True):
         '''Initialises properties for a vehhiacle.
         Number of car gives the user.
         BUT!!! Each vehicle has to have unique number.
@@ -68,8 +70,6 @@ class Vehicle:
         19 False
         '''
         self.isAvailable = isAvailable
-
-        # Vehicle.vehicleNo += 1
         self.vehicleNo = vehicleNo
 
 
@@ -83,11 +83,11 @@ class Order:
     >>> order = Order('John', 'Lviv', 121, [orange, hat, fridge])
     Your order number is 100001.
     '''
-    
+
     order_id = 100000
 
-
-    def __init__(self, user_name: str, location: Location, postoffice: int, items: list, vehicle: object=None):
+    def __init__(self, user_name: str, location: Location,
+                      postoffice: int, items: list, vehicle: object = None):
         '''Initialises an order information
         >>> orange = Item('orange', 15)
         >>> hat = Item('hat', 35)
@@ -107,7 +107,6 @@ class Order:
         self.orderid = Order.order_id
         self.vehicle = vehicle
         print(f'Your order number is {self.orderid}.')
- 
 
     def calculateAmount(self) -> float:
         '''Calculates the total prise of delivery
@@ -123,10 +122,9 @@ class Order:
         total_price = 0
         for item in self.items:
             total_price += item.price
-        
+
         return total_price
 
-        
     def assignVehicle(self, vehicle: Vehicle):
         '''To assign given Vehicle to a delivery
         >>> orange = Item('orange', 15)
@@ -142,7 +140,6 @@ class Order:
         '''
         self.vehicle = Vehicle(vehicle)
 
-
     def __str__(self) -> str:
         '''Prints information messege to a user
         >>> orange = Item('orange', 15)
@@ -152,17 +149,10 @@ class Order:
         >>> print(order)
         Your order #100003 is sent to Lviv. Total price: 15 UAH.
         '''
-        price = self.calculateAmount()
-        return f'Your order #{self.orderid} is sent to {self.location.city}. Total price: {price} UAH.'
 
-    # def __repr__(self):
-    #     return 'Second yes'
+        order_id, city, price = self.orderid, self.location.city, self.calculateAmount()
+        return f'Your order #{order_id} is sent to {city}. Total price: {price} UAH.'
 
-# item = Item('a_thing', 10)
-# my_order = Order('A', 'Lwiw', [item])
-# print(my_order.calculateAmount())
-# print(my_order)
-# # my_order()
 
 if __name__ == '__main__':
     import doctest

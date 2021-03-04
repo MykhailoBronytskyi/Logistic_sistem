@@ -1,3 +1,5 @@
+'''The interface of notebook'''
+
 import sys
 from notebook import Note, Notebook
 

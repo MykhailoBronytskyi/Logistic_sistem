@@ -1,9 +1,9 @@
+'''Module for creating and opetation with e-notes'''
 import datetime
 
 
-
 class Note:
-    '''Represent a note in the notebook. Match against a 
+    '''Represent a note in the notebook. Match against a
     string in searches and store tags for each note.
     >>> note = Note('Hello world', 'My note')
     >>> print(note.script, note.tags, note.id)
@@ -19,6 +19,7 @@ class Note:
         self.creation_date = datetime.date.today()
         Notebook.last_id += 1
         self.id = Notebook.last_id
+
 
     def match(self, filter: str):
         '''Determine if this note matches the filter
@@ -57,6 +58,7 @@ class Notebook:
     '''
 
     last_id = 0
+
     def __init__(self):
         '''Initialize a notebook with an empty list.'''
         self.notes = []
@@ -72,12 +74,12 @@ class Notebook:
             if str(note.id) == str(note_id):
                 return note
             return None
-    
+
     def modify_script(self, note_id: int, upgrade_var: str, _switch='script'):
         '''Find the note with the given id and change its script or
         tags to the given value.'''
         note = self._find_note(note_id)
-        
+
         if note:
             if _switch == 'script':
                 note.script = upgrade_var
@@ -90,7 +92,7 @@ class Notebook:
     def modify_tags(self, note_id: int, tags: str):
         '''Find the note with the given id and change its
         tags to the given value.'''
-        self.modify_script(note_id, upgrade_var = tags, _switch = 'tags')
+        self.modify_script(note_id, upgrade_var=tags, _switch='tags')
 
     def search(self, filter: str):
         '''Find all notes that match the given filter
